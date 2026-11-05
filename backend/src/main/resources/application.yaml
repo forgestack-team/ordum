@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: ordum
+
+  # Os dados de conexão são fornecidos pelo ambiente.
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+  jpa:
+    # A criação e evolução das tabelas ficam sob responsabilidade do Flyway.
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
