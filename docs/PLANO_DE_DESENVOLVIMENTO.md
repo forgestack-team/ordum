@@ -4,9 +4,9 @@ Todas as etapas abaixo estão planejadas. Não há entrega de software validada 
 
 ## 1. Preparar o ambiente
 
-Criar backend, frontend e Compose. Fixar versões compatíveis, configurar Maven Wrapper, migração inicial e modelo de variáveis. Documentar os comandos de execução.
+Criar backend com Gradle Wrapper (Java 21 + Spring Boot 4.1.2), frontend com Angular 22, Compose com PostgreSQL 18, migração inicial com Flyway e padronização de comandos com Makefile. Documentar as instruções de execução no README e Makefile.
 
-**Aceite:** outra pessoa do grupo consegue iniciar o banco, o backend e o frontend seguindo as instruções.
+**Aceite:** qualquer pessoa do grupo consegue clonar o repositório e rodar `make up` e os comandos de execução do backend e frontend com sucesso.
 
 ## 2. Contas e categorias
 
@@ -34,14 +34,14 @@ Revisar telas, mensagens, filtros, documentação de execução e testes. Execut
 
 ## Organização e Capacidade do Time
 
-- **Tamanho da equipe:** ~7 a 8 pessoas (todos atuando como full stack).
+- **Tamanho da equipe:** 5 pessoas (todos atuando como full stack colaborativos).
+- **Integrantes:** Bianca Salomão, Fabio, Lucas Yago, Marcelo Rodrigues e Matheus.
 - **Papel de Product Owner (PO):** Matheus.
 - **Disponibilidade semanal informada:**
-  - Matheus: 6h/semana
-  - Marcelo: 6h/semana
-  - Bianca: 6h/semana
-  - Fabio: 4h/semana
-  - Joniel: 4h/semana
-  - Lucas Yago e Nicole Ferraz: a confirmar na reunião (estimativa base: ~4h/semana cada).
-  - **Capacidade semanal estimada:** ~26h a 34h/semana total do time (ou ~38h se houver mais um integrante).
+  - Matheus: ~6h/semana
+  - Marcelo: ~6h/semana
+  - Bianca: ~6h/semana
+  - Fabio: ~4h/semana
+  - Lucas Yago: ~4h/semana
+  - **Capacidade semanal estimada:** ~26h/semana total do time.
 - **Cadência recomendada:** Sprints de 2 semanas (para acomodar dedicação parcial, pair programming e ciclo completo de PRs e code review).

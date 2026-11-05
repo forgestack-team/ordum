@@ -8,7 +8,7 @@ Este documento organiza o backlog do MVP em épicos e histórias de usuário com
 
 | ID | Épico | Objetivo |
 |---|---|---|
-| **EP01** | Infraestrutura e Bootstrap | Setup inicial do monorepo, Docker, backend Spring Boot e frontend Angular. |
+| **EP01** | Infraestrutura e Bootstrap | Setup inicial do monorepo, Docker com PostgreSQL 18, backend Spring Boot com Gradle e Flyway, frontend Angular 22 e automação via Makefile. |
 | **EP02** | Gestão de Contas e Categorias | CRUD de contas bancárias/carteiras e categorias financeiras (base para lançamentos). |
 | **EP03** | Lançamentos Financeiros e Saldos | Registro de receitas e despesas, projeções, confirmação manual e saldo consolidado. |
 | **EP04** | Transferências entre Contas | Movimentação entre contas cadastradas com garantia de atomicidade e reversão. |
@@ -21,33 +21,72 @@ Este documento organiza o backlog do MVP em épicos e histórias de usuário com
 
 ### Épico 01: Infraestrutura e Bootstrap (Foco da Sprint 1)
 
-#### `TASK-01` • Setup do Ambiente Docker e Banco de Dados
-- **Descrição:** Criar `compose.yaml` com PostgreSQL (versão fixada, ex: 16-alpine) e script `.env.example`.
-- **Critérios de Aceite:**
-  - `docker compose up -d` sobe o banco de dados saudável.
-  - Documentação no README explicando portas, credenciais padrão e variáveis.
+> **Meta da Sprint 1:** Criar o ambiente de desenvolvimento completo para que qualquer integrante do time consiga clonar o projeto e subir Front, Back e Banco localmente com comandos simples e padronizados.
+>
+> **Equipe (5 integrantes):** Bianca Salomão, Fabio, Lucas Yago, Marcelo Rodrigues e Matheus.
 
-#### `TASK-02` • Bootstrap do Backend (Java 21 + Spring Boot)
-- **Descrição:** Inicializar a pasta `backend/` com Maven Wrapper, Java 21, dependências essenciais e integração com Flyway.
-- **Dependências:** Spring Web, Spring Data JPA, PostgreSQL Driver, Flyway Migration, Bean Validation, Lombok (opcional/a definir).
+#### `TASK-01` • Setup do Ambiente Docker e Banco de Dados (PostgreSQL 18)
+- **Responsável Sugerido:** Matheus
+- **Descrição:** Criar o `compose.yaml` configurado com a imagem oficial do **PostgreSQL 18**, portas mapeadas (`5432`), volume para dados persistentes e arquivo `.env.example`.
 - **Critérios de Aceite:**
-  - Aplicação conecta com sucesso no PostgreSQL via Docker.
-  - Endpoint de health-check ou ping (`GET /api/status` ou Actuator) respondendo `200 OK`.
-  - Migração inicial Flyway (`V1__baseline.sql`) executada sem erros.
+  - `docker compose up -d` (ou comando equivalente no Makefile) sobe o banco de dados saudável.
+  - Dados persistem entre reinicializações do container.
+  - Documentação das variáveis de ambiente (`POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_PORT`) no `.env.example`.
 
-#### `TASK-03` • Bootstrap do Frontend (Angular)
-- **Descrição:** Inicializar o projeto `frontend/` com Angular (versão atual estável, ex: v17+ ou v18+ com Standalone Components).
+#### `TASK-02` • Bootstrap do Backend (Java 21 + Spring Boot 4.1.2 + Gradle)
+- **Responsável Sugerido:** Marcelo Rodrigues
+- **Descrição:** Inicializar o diretório `backend/` utilizando **Gradle** (com Gradle Wrapper `./gradlew`), Java 21 e Spring Boot 4.1.2. Estruturar os pacotes base da aplicação seguindo boas práticas arquiteturais.
+- **Dependências Base:** Spring Web, Spring Data JPA, PostgreSQL Driver, Flyway Migration, Bean Validation, Lombok.
 - **Critérios de Aceite:**
-  - Projeto roda localmente via `npm start` ou `ng serve`.
-  - Configuração de proxy reverso (`proxy.conf.json`) para apontar `/api` para a porta do backend.
-  - Estrutura base de pastas (core, shared, features, layouts) definida.
-  - Escolha e setup do framework de estilização/UI (Tailwind CSS, Angular Material ou Bootstrap).
+  - Execução bem-sucedida via `./gradlew bootRun` e suite de testes passando (`./gradlew test`).
+  - Configuração do `application.yml` conectando ao PostgreSQL via variáveis de ambiente.
+  - Endpoint de healthcheck (`GET /api/v1/ping` ou Actuator) respondendo `200 OK`.
+  - Estrutura base de pacotes configurada: `config`, `controller`, `domain`, `dto`, `repository`, `service`.
 
-#### `TASK-04` • Padronização de Git e Fluxo de Trabalho do Time
-- **Descrição:** Definir estratégia de branches (GitFlow / GitHub Flow), padrões de commits (Conventional Commits) e PR Templates.
+#### `TASK-03` • Bootstrap do Frontend (Angular 22)
+- **Responsável Sugerido:** Bianca Salomão
+- **Descrição:** Inicializar a pasta `frontend/` utilizando o **Angular 22** com Standalone Components, roteamento, formatação (`Prettier`), linter (`ESLint`) e estilos base.
 - **Critérios de Aceite:**
-  - Arquivo `CONTRIBUTING.md` ou guia no README explicando o fluxo.
-  - Template de Pull Request criado (`.github/pull_request_template.md`).
+  - Projeto executando sem erros localmente via `npm start` ou `ng serve` na porta 4200.
+  - Configuração de proxy de desenvolvimento (`proxy.conf.json`) redirecionando `/api` para a porta 8080 do backend.
+  - Estrutura base de diretórios estabelecida (`core/`, `shared/`, `features/`, `layouts/`).
+  - Criação de uma página inicial de status consumindo o endpoint de teste da API.
+
+#### `TASK-04` • Versionamento de Banco de Dados com Flyway
+- **Responsável Sugerido:** Lucas Yago
+- **Descrição:** Configurar o Flyway no backend Gradle para gerenciar e versionar o esquema do PostgreSQL 18. Criar a estrutura em `src/main/resources/db/migration/` e a migração inicial `V1__baseline.sql`.
+- **Critérios de Aceite:**
+  - Flyway executa automaticamente na inicialização da aplicação Spring Boot.
+  - Criação da tabela de controle `flyway_schema_history` no PostgreSQL 18.
+  - Migration inicial `V1__baseline.sql` cria as tabelas preliminares necessárias para o domínio financeiro.
+  - Logs da aplicação confirmam a migração executada com sucesso.
+
+#### `TASK-05` • Automação e Orquestração do Ambiente com Makefile
+- **Responsável Sugerido:** Fabio
+- **Descrição:** Criar o arquivo `Makefile` na raiz do repositório para centralizar e simplificar os comandos do ciclo de desenvolvimento para todos os membros da equipe.
+- **Comandos Mínimos Esperados:**
+  - `make help`: lista todos os comandos disponíveis com breve descrição.
+  - `make up`: sobe os containers do Docker em background (`docker compose up -d`).
+  - `make down`: encerra os containers e libera os recursos.
+  - `make run-back`: executa o backend Spring Boot via Gradle Wrapper (`./gradlew bootRun`).
+  - `make run-front`: instala dependências se necessário e inicia o servidor do Angular 22.
+  - `make test`: executa os testes do backend (`./gradlew test`).
+  - `make clean`: limpa builds locais e caches.
+- **Critérios de Aceite:**
+  - Todos os comandos testados e funcionais em ambiente Linux/macOS.
+  - Desenvolvedor novo consegue clonar e rodar o projeto utilizando apenas comandos `make`.
+
+---
+
+### Matriz de Atribuição da Sprint 1
+
+| Tarefa | Responsável | Stack Principal | Foco da Entrega |
+|---|---|---|---|
+| **TASK-01** | Matheus | Docker / PostgreSQL 18 | Infraestrutura de dados e variáveis de ambiente |
+| **TASK-02** | Marcelo Rodrigues | Java 21 / Spring Boot / Gradle | Setup da API REST e estrutura de pacotes |
+| **TASK-03** | Bianca Salomão | Angular 22 / TypeScript | Setup da SPA, proxy reverso e layout base |
+| **TASK-04** | Lucas Yago | Flyway / SQL / Spring Data | Migrações automáticas e baseline do banco |
+| **TASK-05** | Fabio | Makefile / Shell / Docker | Padronização dos scripts e orquestração do monorepo |
 
 ---
 

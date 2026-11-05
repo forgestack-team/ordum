@@ -4,9 +4,11 @@ Aplicativo de finanças pessoais desenvolvido pelo grupo de estudo, com foco ini
 
 ## Tecnologias definidas
 
-- Java 21, Spring Boot e Maven no backend.
-- Angular no frontend.
-- PostgreSQL executado via Docker Compose.
+- **Backend:** Java 21, Spring Boot 4.1.2 e Gradle (com Gradle Wrapper).
+- **Frontend:** Angular 22 com componentes standalone.
+- **Banco de Dados:** PostgreSQL 18 executado via Docker Compose.
+- **Migrações:** Flyway integrado ao backend Spring Boot.
+- **Automação:** Makefile para padronização dos comandos de ambiente local.
 - Backend e frontend executados localmente durante o desenvolvimento.
 
 ## Estado do projeto

@@ -10,6 +10,7 @@ ordum/
 ├── backend/
 ├── frontend/
 ├── compose.yaml
+├── Makefile
 └── .env.example
 ```
 
@@ -17,7 +18,7 @@ Atualmente, apenas a documentação está presente. As demais pastas e configura
 
 ## Backend
 
-Java 21, Spring Boot e Maven, com Spring Web, Spring Data JPA, Bean Validation e Flyway. Organizar o código por funcionalidade, separando controllers, serviços, repositórios e DTOs. Não expor entidades JPA diretamente na API.
+Java 21, Spring Boot 4.1.2 e Gradle (com Gradle Wrapper `./gradlew`), utilizando Spring Web, Spring Data JPA, Bean Validation e Flyway. Organizar o código por funcionalidade, separando controllers, serviços, repositórios e DTOs. Não expor entidades JPA diretamente na API.
 
 Entidades planejadas: Conta, Categoria, Lançamento, Recorrência e Transferência. Datas financeiras serão representadas sem horário. Operações financeiras que alterem múltiplos registros deverão ser transacionais.
 
@@ -25,7 +26,11 @@ As migrações Flyway definirão e evoluirão o esquema. O banco deverá aplicar
 
 ## Frontend
 
-Angular com componentes standalone e formulários reativos. Telas de resumo, contas, categorias e lançamentos, com acesso aos fluxos de transferências e recorrências. Exibir erros de validação de forma compreensível e atualizar saldos após as operações.
+Angular 22 com componentes standalone e formulários reativos. Telas de resumo, contas, categorias e lançamentos, com acesso aos fluxos de transferências e recorrências. Exibir erros de validação de forma compreensível e atualizar saldos após as operações.
+
+## Automação e Orquestração
+
+Makefile na raiz do projeto para padronização de comandos (`make up`, `make down`, `make run-back`, `make run-front`, `make test`, etc.), permitindo que qualquer desenvolvedor suba e gerencie o ambiente completo com facilidade.
 
 ## API REST planejada
 
@@ -44,11 +49,11 @@ Usar erros uniformes para validação e regras de negócio. O frontend não ser�
 
 ## Ambiente e versões
 
-PostgreSQL via Docker Compose; Java e Angular executados localmente. Incluir Maven Wrapper, imagem do banco com versão fixada, dependências fixadas, modelo de configuração e instruções de execução.
+PostgreSQL 18 via Docker Compose; Java 21 e Angular 22 executados localmente. Incluir Gradle Wrapper, imagem do PostgreSQL 18 fixada, dependências fixadas, modelo de configuração e instruções de execução via Makefile.
 
-Java 21 está confirmado. Versões exatas de Spring Boot, Maven Wrapper, Angular, Node.js e PostgreSQL deverão ser verificadas em conjunto e fixadas antes do bootstrap. Nenhuma combinação foi testada neste repositório ainda.
+Versões definidas: Java 21, Spring Boot 4.1.2, Gradle Wrapper, Angular 22 e PostgreSQL 18. Nenhuma combinação foi testada neste repositório ainda.
 
-Credenciais locais ficarão fora do Git. O `.env.example` documentará as variáveis necessárias sem conter segredos reais. A integração entre frontend e API deverá ter configuração local documentada.
+Credenciais locais ficarão fora do Git. O `.env.example` documentará as variáveis necessárias sem conter segredos reais. A integração entre frontend e API deverá ter configuração local documentada via proxy reverso.
 
 ## Uso inicial
 
