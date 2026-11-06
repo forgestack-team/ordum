@@ -1,0 +1,108 @@
+# ==========================================
+# 1. Segredos e Variáveis de Ambiente (CRÍTICO)
+# ==========================================
+.env
+.env.*
+*.env
+infra/.env
+backend/.env
+frontend/.env
+
+# Garante que os modelos com exemplos fictícios continuem no Git
+!.env.example
+!infra/.env.example
+!backend/.env.example
+!frontend/.env.example
+
+# Chaves privadas e certificados
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+
+# ==========================================
+# 2. Infraestrutura & Banco de Dados (Docker)
+# ==========================================
+pgdata/
+postgres_data/
+docker-data/
+data/
+*.dump
+*.backup
+
+# ==========================================
+# 3. Backend (Java / Spring Boot / Gradle)
+# ==========================================
+.gradle/
+build/
+out/
+bin/
+target/
+.gradletasknamecache
+
+# Mantém o executável do Gradle Wrapper no Git
+!gradle/wrapper/gradle-wrapper.jar
+
+# ==========================================
+# 4. Frontend (Node / Angular)
+# ==========================================
+node_modules/
+.angular/
+dist/
+tmp/
+.sass-cache/
+connect.lock
+coverage/
+*.lcov
+
+# Logs do gerenciador de pacotes
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================================
+# 5. IDEs & Editores de Código
+# ==========================================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VS Code (ignora histórico e workspace local; arquivos essenciais de equipe podem ser exceção se necessário)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# ==========================================
+# 6. Sistema Operacional (macOS, Windows, Linux)
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ==========================================
+# 7. Logs e Arquivos Temporários
+# ==========================================
+*.log
+*.tmp
+*.bak
+*.swp
+*~
