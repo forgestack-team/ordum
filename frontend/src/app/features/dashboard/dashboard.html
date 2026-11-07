@@ -1,0 +1,13 @@
+<section>
+  <h1>Ordum</h1>
+
+  <h2>Status da API</h2>
+
+  <p
+    [class.status-online]="apiStatus() === 'Online'"
+    [class.status-offline]="apiStatus() === 'Offline'"
+    [class.status-checking]="apiStatus() === 'Verificando'"
+  >
+    {{ apiStatus() }}
+  </p>
+</section>
