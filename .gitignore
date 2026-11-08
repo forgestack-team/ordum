@@ -1,0 +1,8 @@
+# Configurações locais do IntelliJ IDEA.
+.idea/
+*.iml
+
+# Credenciais e variáveis locais de ambiente.
+.env
+.env.*
+!.env.example

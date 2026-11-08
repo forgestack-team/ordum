@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: ordum
+
+  config:
+    # Procura o arquivo local ao executar pela raiz ou pela pasta backend.
+    import:
+      - "optional:file:./infra/.env[.properties]"
+      - "optional:file:../infra/.env[.properties]"
+
+  # Usa os valores carregados do arquivo local ou do ambiente.
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+  jpa:
+    # O Flyway cuida das tabelas; o Hibernate apenas confere a estrutura.
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
