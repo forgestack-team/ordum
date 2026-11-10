@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
                     printStatus(flyway, null);
                 } catch (RuntimeException e) {
                     printStatus(flyway, e);
-                    throw e; // a aplicacao continua parando normalmente
+                    throw e;
                 }
             };
         }
