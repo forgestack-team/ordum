@@ -8,6 +8,6 @@ export class Dashboard {
   private readonly api = inject(Api);
 
   getHealth() {
-    return this.api.get('/v1/ping');
+    return this.api.getText('/v1/ping');
   }
 }

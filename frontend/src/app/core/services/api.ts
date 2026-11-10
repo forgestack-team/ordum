@@ -12,4 +12,10 @@ export class Api {
   get<T>(endpoint: string) {
     return this.http.get<T>(`${this.baseUrl}${endpoint}`);
   }
+
+  getText(endpoint: string) {
+    return this.http.get(`${this.baseUrl}${endpoint}`, {
+      responseType: 'text',
+    });
+  }
 }
