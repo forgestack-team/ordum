@@ -1,20 +1,19 @@
 # Arquitetura e ambiente
 
-## Estrutura planejada
+## Estrutura do repositório
 
 Um repositório único, independente do repositório de materiais do grupo:
 
 ```text
 ordum/
-├── docs/
-├── backend/
-├── frontend/
-├── compose.yaml
-├── Makefile
-└── .env.example
+├── docs/                # Documentação do projeto
+├── infra/               # Docker Compose (PostgreSQL 18) e .env.example
+├── backend/             # API Spring Boot 4.1.2 (Gradle Wrapper + Java 21)
+├── frontend/            # SPA Angular 22 (em bootstrap na branch feature/frontend)
+└── Makefile             # Automação na raiz (planejado)
 ```
 
-Atualmente, apenas a documentação está presente. As demais pastas e configurações são planejadas.
+Atualmente, `docs/`, `infra/` e a estrutura inicial de `backend/` (com endpoint `GET /api/v1/ping`) já estão presentes na `main`. As pastas `frontend/`, as migrações Flyway (`backend/src/main/resources/db/migration/`) e o `Makefile` estão em andamento ou pendentes na Sprint 1.
 
 ## Backend
 
@@ -34,7 +33,7 @@ Makefile na raiz do projeto para padronização de comandos (`make up`, `make do
 
 ## API REST planejada
 
-Prefixo `/api`. Os contratos detalhados de campos, respostas e códigos HTTP ainda serão definidos na implementação.
+Prefixo `/api` (o endpoint inicial de verificação já implementado utiliza `/api/v1/ping`). Os contratos detalhados de campos, respostas e códigos HTTP dos recursos de negócio ainda serão definidos na implementação.
 
 | Recurso | Operações previstas |
 |---|---|
@@ -51,7 +50,7 @@ Usar erros uniformes para validação e regras de negócio. O frontend não ser�
 
 PostgreSQL 18 via Docker Compose; Java 21 e Angular 22 executados localmente. Incluir Gradle Wrapper, imagem do PostgreSQL 18 fixada, dependências fixadas, modelo de configuração e instruções de execução via Makefile.
 
-Versões definidas: Java 21, Spring Boot 4.1.2, Gradle Wrapper, Angular 22 e PostgreSQL 18. Nenhuma combinação foi testada neste repositório ainda.
+Versões definidas: Java 21, Spring Boot 4.1.2, Gradle Wrapper, Angular 22 e PostgreSQL 18. Na base atual, o PostgreSQL 18 via Docker Compose (`infra/`) e o bootstrap do backend (`GET /api/v1/ping` e suíte inicial `./gradlew test`) já foram integrados; a validação ponta a ponta com Flyway, Angular 22 e Makefile ainda depende da conclusão das demais entregas da Sprint 1.
 
 Credenciais locais ficarão fora do Git. O `.env.example` documentará as variáveis necessárias sem conter segredos reais. A integração entre frontend e API deverá ter configuração local documentada via proxy reverso.
 
