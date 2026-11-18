@@ -19,9 +19,11 @@ Atualmente, `docs/`, `infra/` e a estrutura inicial de `backend/` (com endpoint 
 
 Java 21, Spring Boot 4.1.2 e Gradle (com Gradle Wrapper `./gradlew`), utilizando Spring Web, Spring Data JPA, Bean Validation e Flyway. Organizar o código por funcionalidade, separando controllers, serviços, repositórios e DTOs. Não expor entidades JPA diretamente na API.
 
-Entidades planejadas: Conta, Categoria, Lançamento, Recorrência e Transferência. Datas financeiras serão representadas sem horário. Operações financeiras que alterem múltiplos registros deverão ser transacionais.
+**Padrão de idioma:** Código-fonte e esquema do banco de dados em **inglês**; documentação em **português**.
 
-As migrações Flyway definirão e evoluirão o esquema. O banco deverá aplicar chaves estrangeiras, precisão monetária e unicidade das ocorrências recorrentes.
+Entidades planejadas (`br.com.ordum.domain`): `Account` (Conta), `Category` (Categoria), `Transaction` (Lançamento), `Recurrence` (Recorrência) e `Transfer` (Transferência), além dos enums `TransactionType` (`INCOME`, `EXPENSE`) e `TransactionStatus` (`PENDING`, `CONFIRMED`). Datas financeiras serão representadas sem horário (`LocalDate` / `DATE`). Operações financeiras que alterem múltiplos registros deverão ser transacionais.
+
+As migrações Flyway (`backend/src/main/resources/db/migration/`) definirão e evoluirão o esquema de forma **granular** (mantendo `V1__baseline.sql` com `users` e adicionando `V2__create_accounts_table.sql`, `V3__create_categories_table.sql`, `V4__create_transactions_table.sql`, etc.). O banco deverá aplicar chaves estrangeiras, precisão monetária (`NUMERIC(19,2)`) e unicidade das ocorrências recorrentes.
 
 ## Frontend
 

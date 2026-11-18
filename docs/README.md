@@ -11,6 +11,7 @@ O grupo escolheu construir um controle de finanças pessoais para aprender com u
 5. [Validação](VALIDACAO.md): critérios e cenários de teste.
 6. [Decisões e pendências](DECISOES.md): escolhas confirmadas e detalhes ainda sujeitos à revisão.
 7. [Backlog do Produto](BACKLOG.md): épicos, histórias de usuário e tarefas para as sprints.
+8. [Planejamento e Guia da Sprint 2](SPRINT_2.md): diagnóstico do repositório, tarefas da Sprint 2, referências de modelagem (DER e Classes) e guia para Jira/GitHub.
 
 ## Como manter estes registros
 

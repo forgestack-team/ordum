@@ -80,13 +80,33 @@ Este documento organiza o backlog do MVP em épicos e histórias de usuário com
 
 ### Matriz de Atribuição da Sprint 1
 
-| Tarefa | Responsável | Stack Principal | Foco da Entrega |
-|---|---|---|---|
-| **TASK-01** | Matheus | Docker / PostgreSQL 18 | Infraestrutura de dados e variáveis de ambiente |
-| **TASK-02** | Marcelo Rodrigues | Java 21 / Spring Boot / Gradle | Setup da API REST e estrutura de pacotes |
-| **TASK-03** | Bianca Salomão | Angular 22 / TypeScript | Setup da SPA, proxy reverso e layout base |
-| **TASK-04** | Lucas Yago | Flyway / SQL / Spring Data | Migrações automáticas e baseline do banco |
-| **TASK-05** | Fabio | Makefile / Shell / Docker | Padronização dos scripts e orquestração do monorepo |
+| Tarefa | Responsável | Stack Principal | Foco da Entrega | Status na Entrada da Sprint 2 |
+|---|---|---|---|---|
+| **TASK-01** | Matheus | Docker / PostgreSQL 18 | Infraestrutura de dados e variáveis de ambiente | ✅ Concluída na `main` (PR #7) |
+| **TASK-02** | Marcelo Rodrigues | Java 21 / Spring Boot / Gradle | Setup da API REST e estrutura de pacotes | ✅ Concluída na `main` (PR #8) |
+| **TASK-03** | Bianca Salomão | Angular 22 / TypeScript | Setup da SPA, proxy reverso e layout base | ⏳ Em revisão (`origin/feature/frontend`) |
+| **TASK-04** | Lucas Yago | Flyway / SQL / Spring Data | Migrações automáticas e baseline do banco | ⏳ Em revisão (`origin/chore/setup-flyway-migrations`) |
+| **TASK-05** | Fabio | Makefile / Shell / Docker | Padronização dos scripts e orquestração do monorepo | ⏳ Em revisão (`origin/chore/makefile`) |
+
+---
+
+### Planejamento da Sprint 2 (2 Semanas • 41,5h líquidas / 52h brutas)
+
+> **Meta da Sprint 2:** Consolidar e validar na `main` as entregas da Sprint 1 (`Makefile`, `Flyway` e `Frontend` conectado ao `Backend`), padronizar versões locais (`.nvmrc` e `.sdkmanrc`), elaborar o DER e o Diagrama de Classes, iniciar as migrações granulares e entidades do domínio financeiro em inglês (`Account`, `Category`, `Transaction`, cálculo de Saldos) e estruturar a pesquisa de telas do Dashboard.
+>
+> 📄 **Guia completo, diagramas de referência e cards para Jira/GitHub:** consulte [docs/SPRINT_2.md](SPRINT_2.md).
+
+| ID | Tarefa da Sprint 2 | Responsável Sugerido | Revisor / Par | Estimativa |
+|---|---|---|---|---|
+| **S2-01** | Confirmar funcionamento do `Makefile` e integrar na `main` | Fabio | Matheus | 3h |
+| **S2-02** | Criar arquivos `.nvmrc` e `.sdkmanrc` na raiz do projeto | Fabio | Marcelo Rodrigues | 2h |
+| **S2-03** | Confirmar funcionamento do Frontend, conexão com Backend (`/api/v1/ping`) e integrar na `main` | Bianca Salomão | Marcelo Rodrigues | 3,5h |
+| **S2-04** | Confirmar organização base do Flyway (`V1__baseline.sql` com `users`) e integrar na `main` | Lucas Yago | Matheus | 2h |
+| **S2-05** | Criar Diagrama de Relacionamento das Tabelas (DER) em `docs/MODELAGEM.md` | Lucas Yago | Marcelo Rodrigues | 3h |
+| **S2-06** | Criar Diagrama de Classes do Domínio em `docs/MODELAGEM.md` | Matheus | Lucas Yago | 3,5h |
+| **S2-07** | Criar migrations granulares do domínio financeiro (`V2` accounts, `V3` categories, `V4` transactions) | Lucas Yago e Matheus | Marcelo Rodrigues | 3h |
+| **S2-08** | Estruturar entidades JPA (`Account`, `Category`, `Transaction`, Enums) e modelo de Saldos (`BalanceSummary`) | Marcelo Rodrigues e Matheus | Lucas Yago | 10,5h |
+| **S2-09** | Pesquisar telas para criação do Dashboard e documentar wireframe em `docs/PESQUISA_DASHBOARD.md` | Bianca Salomão (apoio: Fabio) | Matheus | 6h |
 
 ---
 
