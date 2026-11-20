@@ -22,6 +22,7 @@
 - **Única tarefa atribuída no início da Sprint 2:** revisão do frontend (PR #10) pelo Marcelo, com os pontos registrados por escrito. As demais tarefas ficam em aberto até a planning.
 - **Sprint 2:** 16/11/2026 a 25/11/2026; planning em 16/11 e review/retro em 25/11.
 - **Estratégia de branches:** `main` mantém a versão estável; `dev` é a branch de integração das features; cada tarefa usa uma branch própria no padrão `<tipo>/S2-<numero>-<slug>` e entra por Pull Request.
+- **Identidade visual:** roxo (`#6750D8`) como cor primária; verde para receitas e saldo positivo, vermelho para despesas e saldo negativo, interface clara com tons pastéis. Detalhes em [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md).
 - Evolução posterior para usuários individuais, autenticação, privacidade e gestão financeira mais completa.
 
 ## Detalhes incorporados ao plano técnico aprovado

@@ -12,6 +12,7 @@ O grupo escolheu construir um controle de finanças pessoais para aprender com u
 6. [Decisões e pendências](DECISOES.md): escolhas confirmadas e detalhes ainda sujeitos à revisão.
 7. [Backlog do Produto](BACKLOG.md): épicos, histórias de usuário e tarefas para as sprints.
 8. [Planejamento e Guia da Sprint 2](SPRINT_2.md): diagnóstico do repositório, tarefas da Sprint 2, referências de modelagem (DER e Classes) e guia para Jira/GitHub.
+9. [Design System](DESIGN_SYSTEM.md): cores, tipografia, componentes e referência visual da tela inicial (imagens em `assets/design-system/`).
 
 ## Como manter estes registros
 
