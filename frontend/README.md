@@ -1,59 +1,65 @@
-# Frontend
+# Frontend do Ordum
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.6.
+Aplicação web do projeto Ordum, desenvolvida com Angular 22 com componentes standalone.
 
-## Development server
+## Estado atual
 
-To start a local development server, run:
+- Bootstrap do Angular 22 com componentes standalone.
+- Integração de proxy reverso (`proxy.conf.json`) redirecionando `/api` para `http://localhost:8080`.
+- Tela de Dashboard com verificação de status da API (`/api/v1/ping`) com suporte a texto puro e timeout resiliente configurado.
+- Suíte de testes unitários com Vitest configurada.
+- Padronização de código com ESLint e Prettier.
 
-```bash
-ng serve
-```
+## Pré-requisitos
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Node.js 22+ e npm 11+.
+- Backend da API em execução na porta `8080` para comunicação completa (opcional para testes unitários ou build isolado).
 
-## Code scaffolding
+## Execução local
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Via Makefile (quando o Makefile estiver integrado à branch)
 
 ```bash
-ng generate --help
+make run-front
 ```
 
-## Building
-
-To build the project run:
+### Via npm (dentro da pasta `frontend/`)
 
 ```bash
-ng build
+cd frontend
+npm install
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Executar os testes
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Via Makefile (a partir da raiz do repositório)
 
 ```bash
-ng test
+make test-front
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Via npm (dentro da pasta `frontend/`)
 
 ```bash
-ng e2e
+cd frontend
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Formatação e Linting
 
-## Additional Resources
+```bash
+cd frontend
+npm run lint          # Executa o ESLint
+npm run format:check  # Verifica a formatação com o Prettier
+npm run format        # Aplica a formatação com o Prettier
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Build de produção
+
+```bash
+cd frontend
+npm run build
+```
+
+Os artefatos compilados serão gerados no diretório `dist/frontend`.

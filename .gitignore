@@ -1,6 +1,5 @@
-
 # ==========================================
-# 1. Segredos e Variáveis de Ambiente
+# 1. Segredos e Variáveis de Ambiente (CRÍTICO)
 # ==========================================
 .env
 .env.*
@@ -9,7 +8,7 @@ infra/.env
 backend/.env
 frontend/.env
 
-# Mantém os arquivos de exemplo no Git
+# Garante que os modelos com exemplos fictícios continuem no Git
 !.env.example
 !infra/.env.example
 !backend/.env.example
@@ -24,7 +23,7 @@ frontend/.env
 *.p12
 
 # ==========================================
-# 2. Infraestrutura e Banco de Dados
+# 2. Infraestrutura & Banco de Dados (Docker)
 # ==========================================
 pgdata/
 postgres_data/
@@ -56,19 +55,20 @@ node_modules/
 .angular/
 dist/
 tmp/
+out-tsc/
 .sass-cache/
 connect.lock
 coverage/
 *.lcov
 
-# Logs dos gerenciadores de pacotes
+# Logs do gerenciador de pacotes
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
 # ==========================================
-# 5. IDEs e Editores
+# 5. IDEs & Editores de Código
 # ==========================================
 # IntelliJ IDEA
 .idea/
@@ -79,7 +79,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
-# VS Code
+# VS Code (ignora histórico e workspace local; arquivos essenciais de equipe podem ser exceção se necessário)
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -92,17 +92,8 @@ out/
 .project
 .settings/
 
-# STS
-.apt_generated
-.factorypath
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
 # ==========================================
-# 6. Sistema Operacional
+# 6. Sistema Operacional (macOS, Windows, Linux)
 # ==========================================
 .DS_Store
 .DS_Store?
@@ -112,6 +103,18 @@ bin/
 ehthumbs.db
 Thumbs.db
 desktop.ini
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
 # ==========================================
 # 7. Logs e Arquivos Temporários

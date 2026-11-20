@@ -4,6 +4,9 @@
   "cli": {
     "packageManager": "npm",
     "analytics": false,
+    "completion": {
+      "prompted": true
+    },
     "schematicCollections": ["angular-eslint"]
   },
   "newProjectRoot": "projects",

@@ -1,5 +1,13 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { Dashboard as DashboardService } from './services/dashboard';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { ApiStatus } from './services/api-status';
+
+export type ApiState = 'checking' | 'online' | 'offline';
+
+const LABELS: Record<ApiState, string> = {
+  checking: 'Verificando',
+  online: 'Online',
+  offline: 'Offline',
+};
 
 @Component({
   imports: [],
@@ -8,17 +16,18 @@ import { Dashboard as DashboardService } from './services/dashboard';
   templateUrl: './dashboard.html',
 })
 export class Dashboard implements OnInit {
-  private readonly dashboardService = inject(DashboardService);
+  private readonly apiStatusService = inject(ApiStatus);
 
-  protected readonly apiStatus = signal('Verificando');
+  protected readonly apiState = signal<ApiState>('checking');
+  protected readonly label = computed(() => LABELS[this.apiState()]);
 
   ngOnInit(): void {
-    this.dashboardService.getHealth().subscribe({
+    this.apiStatusService.getHealth().subscribe({
       next: () => {
-        this.apiStatus.set('Online');
+        this.apiState.set('online');
       },
       error: () => {
-        this.apiStatus.set('Offline');
+        this.apiState.set('offline');
       },
     });
   }
