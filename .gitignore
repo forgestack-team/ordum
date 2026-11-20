@@ -55,6 +55,7 @@ node_modules/
 .angular/
 dist/
 tmp/
+out-tsc/
 .sass-cache/
 connect.lock
 coverage/
