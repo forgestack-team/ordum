@@ -35,6 +35,9 @@
               }
             ],
             "styles": ["src/styles.scss"],
+            "optimization": {
+              "fonts": false
+            },
             "security": {
               "allowedHosts": []
             }

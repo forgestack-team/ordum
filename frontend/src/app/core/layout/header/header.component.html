@@ -1,0 +1,35 @@
+<header class="app-header">
+  <div class="search-container">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input
+      type="text"
+      placeholder="Buscar lançamentos, contas ou categorias..."
+      class="search-input"
+    />
+  </div>
+
+  <div class="header-actions">
+    <div class="period-selector">
+      <mat-icon class="calendar-icon">calendar_today</mat-icon>
+      <span class="period-text">{{ currentMonth }}</span>
+      <mat-icon class="dropdown-icon">expand_more</mat-icon>
+    </div>
+
+    <div class="api-status-badge" [class]="'status-' + apiState()">
+      <span class="status-dot"></span>
+      <span class="status-label">
+        @switch (apiState()) {
+          @case ('online') {
+            API Online
+          }
+          @case ('offline') {
+            API Offline
+          }
+          @default {
+            Verificando
+          }
+        }
+      </span>
+    </div>
+  </div>
+</header>

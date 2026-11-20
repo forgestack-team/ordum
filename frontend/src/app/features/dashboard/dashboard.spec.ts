@@ -35,7 +35,7 @@ describe('Dashboard Component', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.status-online')?.textContent?.trim()).toBe('Online');
+    expect(compiled.querySelector('.status-online')?.textContent?.trim()).toContain('Online');
   });
 
   it('should set status to Offline when API responds with error', () => {
@@ -48,6 +48,6 @@ describe('Dashboard Component', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.status-offline')?.textContent?.trim()).toBe('Offline');
+    expect(compiled.querySelector('.status-offline')?.textContent?.trim()).toContain('Offline');
   });
 });

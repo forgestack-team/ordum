@@ -1,0 +1,124 @@
+.app-header {
+  height: 70px;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  padding: 8px 16px;
+  width: 380px;
+  transition: border-color 0.2s ease;
+
+  &:focus-within {
+    border-color: var(--color-primary);
+  }
+
+  .search-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    color: var(--color-text-muted);
+    margin-right: 10px;
+  }
+
+  .search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-strong);
+    width: 100%;
+
+    &::placeholder {
+      color: var(--color-text-muted);
+    }
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.period-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  padding: 8px 14px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-strong);
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #eeeef4;
+  }
+
+  .calendar-icon,
+  .dropdown-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: var(--color-text-muted);
+  }
+}
+
+.api-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  &.status-online {
+    background-color: var(--color-positive-pastel);
+    color: var(--color-positive);
+
+    .status-dot {
+      background-color: var(--color-positive);
+    }
+  }
+
+  &.status-offline {
+    background-color: var(--color-negative-pastel);
+    color: var(--color-negative);
+
+    .status-dot {
+      background-color: var(--color-negative);
+    }
+  }
+
+  &.status-checking {
+    background-color: var(--color-pending-pastel);
+    color: var(--color-pending);
+
+    .status-dot {
+      background-color: var(--color-pending);
+    }
+  }
+}

@@ -1,9 +1,156 @@
-<section>
-  <h1>Ordum</h1>
+<div class="dashboard-page">
+  <!-- Topo da página: Título e Status da API -->
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Visão Geral</h1>
+      <p class="page-subtitle">Acompanhe suas contas, saldos e projeções financeiras</p>
+    </div>
 
-  <h2>Status da API</h2>
+    <div class="api-status-tag" [class]="'status-' + apiState()">
+      <span class="dot"></span>
+      <span>API: {{ label() }}</span>
+    </div>
+  </div>
 
-  <p [class]="'status-' + apiState()">
-    {{ label() }}
-  </p>
-</section>
+  @if (summary(); as data) {
+    <!-- 1. CARDS DE RESUMO (Saldos e Projeções) -->
+    <div class="summary-cards-grid">
+      <!-- Card Saldo Atual -->
+      <div class="card summary-card balance-card">
+        <div class="card-icon-wrapper primary-soft">
+          <mat-icon>account_balance</mat-icon>
+        </div>
+        <div class="card-content">
+          <span class="card-label">Saldo Atual Consolidado</span>
+          <h2 class="card-value tabular-nums">
+            {{ data.currentBalance | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+          </h2>
+          <span class="card-hint">
+            Previsto fim do mês:
+            <strong class="tabular-nums">
+              {{ data.projectedBalance | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+            </strong>
+          </span>
+        </div>
+      </div>
+
+      <!-- Card A Receber -->
+      <div class="card summary-card income-card">
+        <div class="card-icon-wrapper positive-soft">
+          <mat-icon>arrow_downward</mat-icon>
+        </div>
+        <div class="card-content">
+          <span class="card-label">A Receber no Mês</span>
+          <h2 class="card-value tabular-nums positive-text">
+            + {{ data.monthIncomePending | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+          </h2>
+          <span class="card-hint">Entradas pendentes/previstas</span>
+        </div>
+      </div>
+
+      <!-- Card A Pagar -->
+      <div class="card summary-card expense-card">
+        <div class="card-icon-wrapper negative-soft">
+          <mat-icon>arrow_upward</mat-icon>
+        </div>
+        <div class="card-content">
+          <span class="card-label">A Pagar no Mês</span>
+          <h2 class="card-value tabular-nums negative-text">
+            − {{ data.monthExpensePending | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+          </h2>
+          <span class="card-hint">Despesas pendentes/previstas</span>
+        </div>
+      </div>
+
+      <!-- Card Economia Estimada -->
+      <div class="card summary-card savings-card">
+        <div class="card-icon-wrapper neutral-soft">
+          <mat-icon>savings</mat-icon>
+        </div>
+        <div class="card-content">
+          <span class="card-label">Resultado Estimado</span>
+          <h2 class="card-value tabular-nums">
+            {{ data.monthSavings | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+          </h2>
+          <span class="card-hint">Sobra prevista no mês</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. GRID PRINCIPAL: Minhas Contas e Próximos Lançamentos -->
+    <div class="main-sections-grid">
+      <!-- Seção Minhas Contas -->
+      <div class="card accounts-section">
+        <div class="section-header">
+          <h3 class="section-title">Minhas Contas</h3>
+          <button class="btn-action-text">+ Nova Conta</button>
+        </div>
+
+        <div class="accounts-list">
+          @for (acc of data.accounts; track acc.id) {
+            <div class="account-item">
+              <div class="account-badge" [style.background-color]="acc.color">
+                <mat-icon>credit_card</mat-icon>
+              </div>
+              <div class="account-details">
+                <span class="account-name">{{ acc.name }}</span>
+                <span class="account-institution">{{ acc.institution }}</span>
+              </div>
+              <div class="account-balance tabular-nums">
+                {{ acc.balance | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Seção Próximos Lançamentos -->
+      <div class="card transactions-section">
+        <div class="section-header">
+          <h3 class="section-title">Próximos Lançamentos</h3>
+          <button class="btn-action-text">Ver Extrato</button>
+        </div>
+
+        <div class="transactions-list">
+          @for (tx of data.recentTransactions; track tx.id) {
+            <div class="transaction-row">
+              <div
+                class="tx-icon-box"
+                [class.tx-income]="tx.type === 'INCOME'"
+                [class.tx-expense]="tx.type === 'EXPENSE'"
+              >
+                <mat-icon>
+                  {{ tx.type === 'INCOME' ? 'arrow_downward' : 'arrow_upward' }}
+                </mat-icon>
+              </div>
+
+              <div class="tx-info">
+                <span class="tx-desc">{{ tx.description }}</span>
+                <span class="tx-meta">{{ tx.category }} · {{ tx.accountName }}</span>
+              </div>
+
+              <div class="tx-status">
+                <span class="badge" [class]="'badge-' + tx.status.toLowerCase()">
+                  {{ tx.status === 'CONFIRMED' ? 'Confirmado' : 'Pendente' }}
+                </span>
+              </div>
+
+              <div class="tx-date tabular-nums">
+                {{ tx.date | date: 'dd/MM' }}
+              </div>
+
+              <div
+                class="tx-amount tabular-nums"
+                [class.positive-text]="tx.type === 'INCOME'"
+                [class.negative-text]="tx.type === 'EXPENSE'"
+              >
+                {{ tx.type === 'INCOME' ? '+' : '−' }}
+                {{ tx.amount | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>

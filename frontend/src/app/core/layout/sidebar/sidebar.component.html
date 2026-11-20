@@ -1,0 +1,43 @@
+<aside class="app-sidebar">
+  <div class="brand">
+    <div class="brand-logo">
+      <mat-icon class="brand-icon">account_balance</mat-icon>
+    </div>
+    <div class="brand-info">
+      <span class="brand-name">Ordum</span>
+      <span class="brand-tagline">Finanças Pessoais</span>
+    </div>
+  </div>
+
+  <nav class="nav-section">
+    <span class="nav-label">MENU PRINCIPAL</span>
+    <ul class="nav-list">
+      @for (item of navItems; track item.route) {
+        <li class="nav-item">
+          <a
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+            class="nav-link"
+          >
+            <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+            <span class="nav-text">{{ item.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <div class="bottom-section">
+    <ul class="nav-list">
+      @for (item of bottomItems; track item.route) {
+        <li class="nav-item">
+          <a [routerLink]="item.route" routerLinkActive="active" class="nav-link">
+            <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+            <span class="nav-text">{{ item.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+</aside>
